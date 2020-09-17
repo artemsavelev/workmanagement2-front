@@ -35,22 +35,32 @@
             </div>
         </div>
 
-        <ModalWin v-bind:typeSection="typeSection"/>
+        <ModalWin v-bind:typeSection="typeSection"
+                  v-bind:data="data"/>
     </div>
 </template>
 
 <script>
     import ModalWin from "./ModalWin";
+    import req from "../store/headers";
+    import api from "../api/backendApi";
 
     export default {
         name: "ActiveDevice",
         components: { ModalWin },
         data() {
             return {
-                typeSection: 1
+                typeSection: 1,
+                data: []
 
             }
-        }
+        },
+        mounted() {
+
+            req.requestData(api.API_DEVICE_URL, 'GET')
+                .then(response => response.json())
+                .then(json => this.data = json)
+        },
     }
 </script>
 

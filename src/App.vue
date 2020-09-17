@@ -1,32 +1,36 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+    <v-app>
+        <NavBar/>
+        <v-content>
+            <div v-if="!profile && $route.path !== '/login'" class="ma-5">
+                Необходимо <router-link to="/login" tag="a" class="nav-link">авторизоваться</router-link>
+            </div>
+
+            <router-view/>
+        </v-content>
+    </v-app>
 </template>
 
+<script>
+    import NavBar from "./components/NavBar";
+    import {mapGetters} from "vuex";
+
+    export default {
+        name: 'App',
+        components: { NavBar },
+        computed: mapGetters(['profile']),
+
+    };
+</script>
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=cyrillic,cyrillic-ext,latin-ext');
+    @mixin font-montserrat {
+        font-family: 'Montserrat', sans-serif;
     }
-  }
-}
+    #app {
+        @include font-montserrat;
+    }
+
+    //$mainColor:
 </style>

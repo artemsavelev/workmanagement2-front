@@ -1,159 +1,206 @@
 <template>
-  <v-container>
+    <v-container class="pa-0">
 
-<!--    <v-row class="text-center">-->
-<!--    </v-row>-->
 
-    <div class="main">
 
-      <div class="main-container">
-        <div class="main-container-wrapper pa-1 column-70">
-<!--          {{ ordersList.orderId }}-->
-        </div>
+        <div class="main">
 
-        <div class="main-container-wrapper pa-1 column-70">
-<!--          {{ ordersList.extId }}-->
-        </div>
+            <div class="main-container">
+                <div class="main-container-wrapper pa-1 column-70">
+                    {{ order.id }}
+                </div>
 
-        <div class="main-container-wrapper pa-1 column-100">
-          <v-tooltip bottom>
-<!--            <template v-slot:activator="{ on }">-->
-<!--              <span v-on="on">{{ ordersList.creationDate }}</span>-->
-<!--            </template>-->
-<!--            <span>Дата создания: {{ ordersList.creationDate }}</span>-->
-          </v-tooltip>
+                <div class="main-container-wrapper pa-1 column-70">
+                    {{ order.extId }}
+                </div>
 
-        </div>
-
-        <div class="main-container-wrapper pa-1 column-100">
-          <v-tooltip bottom>
-<!--            <template v-slot:activator="{ on }">-->
-<!--              <span v-on="on">{{ ordersList.startDate }}</span>-->
-<!--            </template>-->
-<!--            <span>Дата начала работ: {{ ordersList.startDate }}</span>-->
-          </v-tooltip>
-        </div>
-
-        <div class="main-container-wrapper pa-1 column-150">
-          <v-tooltip bottom>
-<!--            <template v-slot:activator="{ on }">-->
-<!--              <span v-on="on">{{ ordersList.workGroup.workGroupList }}</span>-->
-<!--            </template>-->
-<!--            <span>{{ ordersList.workGroup.workGroupList }}</span>-->
-          </v-tooltip>
-        </div>
-
-        <div class="main-container-wrapper pa-1 column-200">
-<!--                    <span v-for="user in ordersList.users">-->
-
+                <div class="main-container-wrapper pa-1 column-100">
                     <v-tooltip bottom>
-<!--                        <template v-slot:activator="{ on }">-->
-<!--                            <span v-on="on"> {{ user.name }}</span>-->
-<!--                        </template>-->
-<!--                        <span>{{ user.name }}</span>-->
+                        <template v-slot:activator="{ on }">
+                            <span v-on="on">{{ order.createdDate }}</span>
+                        </template>
+                        <span>Дата создания: {{ order.createdDate }}</span>
                     </v-tooltip>
 
-<!--                    </span>-->
-        </div>
+                </div>
 
-        <div class="main-container-wrapper pa-1 column-200">
-          <v-tooltip bottom>
-<!--            <template v-slot:activator="{ on }">-->
-<!--              <span v-on="on">{{ ordersList.customer }}</span>-->
-<!--            </template>-->
-<!--            <span>{{ ordersList.customer }}</span>-->
-          </v-tooltip>
-        </div>
+                <div class="main-container-wrapper pa-1 column-100">
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <span v-on="on">{{ order.startDate }}</span>
+                        </template>
+                        <span>Дата начала работ: {{ order.startDate }}</span>
+                    </v-tooltip>
+                </div>
 
-        <div class="main-container-wrapper pa-1 column-200">
-          <v-tooltip bottom>
-<!--            <template v-slot:activator="{ on }">-->
-<!--              <span v-on="on">{{ ordersList.address }}</span>-->
-<!--            </template>-->
-<!--            <span>{{ ordersList.address }}</span>-->
-          </v-tooltip>
-        </div>
+                <div class="main-container-wrapper pa-1 column-150">
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <span v-on="on">{{ order.workGroup.groupList }}</span>
+                        </template>
+                        <span>{{ order.workGroup.groupList }}</span>
+                    </v-tooltip>
+                </div>
 
-        <div class="main-container-wrapper pa-1 column-200">
-          <v-tooltip bottom>
-<!--            <template v-slot:activator="{ on }">-->
-<!--              <span v-on="on">{{ ordersList.contact }}</span>-->
-<!--            </template>-->
-<!--            <span>{{ ordersList.contact }}</span>-->
-          </v-tooltip>
-        </div>
+                <div class="main-container-wrapper pa-1 column-200">
+                    <span v-for="(user, idx) in order.executors" :key="idx">
 
-        <div class="main-container-wrapper pa-1 column-300">
-          <v-tooltip bottom>
-<!--            <template v-slot:activator="{ on }">-->
-<!--              <span v-on="on">{{ ordersList.workDescription }}</span>-->
-<!--            </template>-->
-<!--            <span>{{ ordersList.workDescription }}</span>-->
-          </v-tooltip>
-        </div>
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <span v-on="on"> {{ user.lastName }},</span>
+                        </template>
+                        <span>{{ user.lastName }}</span>
+                    </v-tooltip>
 
-        <div class="main-container-wrapper pa-1 column-100">
-          <v-tooltip bottom>
-<!--            <template v-slot:activator="{ on }">-->
-<!--              <span v-on="on">{{ ordersList.endDate }}</span>-->
-<!--            </template>-->
-<!--            <span>Дата завершения работ: {{ ordersList.endDate }}</span>-->
-          </v-tooltip>
-        </div>
+                    </span>
+                </div>
 
-        <div class="main-container-wrapper pa-1 column-70">
-<!--                    <span v-if="ordersList.endDate === null && ordersList.verificationDate === null" class="text-red">-->
+                <div class="main-container-wrapper pa-1 column-300">
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <span v-on="on">{{ order.customer.name }}</span>
+                        </template>
+                        <span>{{ order.customer.name }}</span>
+                    </v-tooltip>
+                </div>
+
+                <div class="main-container-wrapper pa-1 column-200">
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <span v-on="on">{{ order.address.name }}</span>
+                        </template>
+                        <span>{{ order.address.name }}</span>
+                    </v-tooltip>
+                </div>
+
+                <!--        <div class="main-container-wrapper pa-1 column-200">-->
+                <!--          <v-tooltip bottom>-->
+                <!--            <template v-slot:activator="{ on }">-->
+                <!--              <span v-on="on">{{ order.customer.contacts }}</span>-->
+                <!--            </template>-->
+                <!--            <span>{{ order.customer.contacts }}</span>-->
+                <!--          </v-tooltip>-->
+                <!--        </div>-->
+
+                <div class="main-container-wrapper pa-1 column-400">
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <span v-on="on">{{ order.workDescription }}</span>
+                        </template>
+                        <span>{{ order.workDescription }}</span>
+                    </v-tooltip>
+                </div>
+
+                <div class="main-container-wrapper pa-1 column-100">
+                    <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                            <span v-on="on">{{ order.endDate }}</span>
+                        </template>
+                        <span>Дата завершения работ: {{ order.endDate }}</span>
+                    </v-tooltip>
+                </div>
+
+                <div class="main-container-wrapper pa-1 column-70">
+                    <span v-if="order.endDate === null && order.verificationDate === null" class="text-red">
                         <v-tooltip bottom>
                             <template v-slot:activator="{ on }">
                                 <v-icon color="red darken-1" v-on="on">{{ mdiAlertCircle }}</v-icon>
                             </template>
                             <span>Статус: в работе</span>
                         </v-tooltip>
-<!--                    </span>-->
+                    </span>
 
-<!--          <span v-else-if="ordersList.verificationDate === null" class="text-green">-->
+                    <span v-else-if="order.verificationDate === null" class="text-green">
                         <v-tooltip bottom>
                             <template v-slot:activator="{ on }">
                                 <v-icon color="green darken-2" v-on="on">{{ mdiCheck }}</v-icon>
                             </template>
                             <span>Статус: завершено</span>
                         </v-tooltip>
-<!--                    </span>-->
+                    </span>
 
-<!--          <span v-else-if="ordersList.verificationDate !== null" class="text-green">-->
+                    <span v-else-if="order.verificationDate !== null" class="text-green">
                         <v-tooltip bottom>
                             <template v-slot:activator="{ on }">
                                 <v-icon color="green darken-2" v-on="on">{{ mdiCheckAll }}</v-icon>
                             </template>
                             <span>Статус: проверено</span>
                         </v-tooltip>
-<!--                    </span>-->
+                    </span>
+                </div>
+
+                <div class="main-container-wrapper pa-1 column-150">
+                    <v-btn icon v-on:click="edit">
+                        <v-icon>{{ mdiPencil }}</v-icon>
+                    </v-btn>
+
+                    <Estimate v-bind:extId="order.extId"
+                              v-bind:customer="order.customer.name"
+                              v-bind:address="order.address.name"/>
+
+
+                    <v-btn icon v-on:click="del">
+                        <v-icon>{{ mdiDelete }}</v-icon>
+                    </v-btn>
+                </div>
+            </div>
         </div>
 
-        <div class="main-container-wrapper pa-1 column-100">
-<!--          <v-btn x-small icon v-on:click="edit">-->
-            <v-icon>edit</v-icon>
-<!--          </v-btn>-->
-<!--          <v-btn x-small icon v-on:click="del">-->
-            <v-icon>close</v-icon>
-<!--          </v-btn>-->
-        </div>
-      </div>
-    </div>
-
-  </v-container>
+    </v-container>
 </template>
 
 <script>
-    import { mdiAlertCircle, mdiCheck, mdiCheckAll } from '@mdi/js';
+    import { mdiAlertCircle, mdiCheck, mdiCheckAll, mdiPencil, mdiDelete } from '@mdi/js';
+    import {mapActions, mapGetters} from "vuex";
+    import Estimate from "../views/Estimate";
     export default {
         name: 'OrderItem',
+        props: ['order', 'editOrder'],
+        computed: {
+            ...mapGetters(['allOrders']),
+
+
+        },
+        components: {Estimate},
+
+        methods: {
+            ...mapActions(['fetchOrders']),
+
+            edit() {
+
+                console.log(this.order.id)
+            },
+            del() {
+
+            },
+
+
+        },
+
+
 
         data: () => ({
-            mdiAlertCircle,
-            mdiCheck,
-            mdiCheckAll
+            mdiAlertCircle, mdiCheck, mdiCheckAll, mdiPencil, mdiDelete,
+
+            customer: {
+                id: 0,
+                name: '',
+            },
+            address: {
+                id: 0,
+                name: '',
+            },
+            workGroup: {
+                id: 0,
+                groupList: '',
+            },
+            dataOrder: {
+
+            }
+
         }),
+
+
     }
 </script>
 
